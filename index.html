@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101210">
+  <title>CubeTime — Speedcubing Timer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="CubeTime início">
+      <span class="brand-icon">C</span>
+      <span>cube<span class="accent">time</span></span>
+    </a>
+
+    <div class="header-actions">
+      <span class="save-status"><span class="status-dot"></span> Salvo localmente</span>
+      <button id="themeBtn" class="icon-btn" title="Alternar tema" aria-label="Alternar tema">☼</button>
+    </div>
+  </header>
+
+  <main class="app">
+    <aside class="sidebar">
+      <div class="section-label">EVENTO</div>
+      <label class="sr-only" for="eventSelect">Escolha um evento</label>
+      <select id="eventSelect" class="event-select"></select>
+
+      <div class="section-label session-label">SESSÃO</div>
+      <div class="session-row">
+        <span id="sessionName">Sessão principal</span>
+        <button id="newSessionBtn" class="small-btn" title="Criar nova sessão">+</button>
+      </div>
+
+      <div class="sidebar-divider"></div>
+      <div class="section-label">ATALHOS</div>
+      <div class="shortcut"><kbd>ESPAÇO</kbd><span>Iniciar / parar</span></div>
+      <div class="shortcut"><kbd>R</kbd><span>Novo scramble</span></div>
+      <div class="shortcut"><kbd>+2</kbd><span>Penalidade de 2s</span></div>
+      <div class="shortcut"><kbd>DEL</kbd><span>Apagar último tempo</span></div>
+
+      <div class="sidebar-divider"></div>
+      <label class="setting-row">
+        <span>
+          <strong>Inspeção WCA</strong>
+          <small>Contagem antes da resolução</small>
+        </span>
+        <input type="checkbox" id="inspectionToggle" checked>
+      </label>
+
+      <div class="sidebar-note">
+        <span class="status-dot"></span>
+        Seus tempos ficam neste navegador.
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <div class="event-heading">
+        <div>
+          <div class="eyebrow">SPEEDCUBING TIMER</div>
+          <h1 id="eventTitle">3×3×3 Cube</h1>
+        </div>
+        <div class="session-pill"><span class="status-dot"></span> <span id="solveCount">0</span> solves</div>
+      </div>
+
+      <section class="timer-card">
+        <div class="scramble-header">
+          <span class="section-label">SCRAMBLE ATUAL</span>
+          <button id="copyScrambleBtn" class="text-btn">Copiar ↗</button>
+        </div>
+        <div id="scramble" class="scramble" aria-live="polite">R U R' U'</div>
+        <div id="scrambleHint" class="scramble-hint">Embaralhamento de treino</div>
+
+        <div class="timer-area" id="timerArea">
+          <div id="inspectionLabel" class="inspection-label"></div>
+          <div id="timer" class="timer" aria-live="off">0.00</div>
+          <div id="timerHint" class="timer-hint">Pressione espaço para começar</div>
+          <div id="touchButton" class="touch-button">TOQUE PARA INICIAR</div>
+        </div>
+
+        <div class="timer-footer">
+          <span><span class="key-indicator">SPACE</span> segure e solte para iniciar</span>
+          <button id="nextScrambleBtn" class="secondary-btn">↻ Novo scramble</button>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-label">MELHOR TEMPO</div>
+          <div id="bestTime" class="stat-value">—</div>
+          <div class="stat-foot">Recorde da sessão</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">MÉDIA AO5</div>
+          <div id="ao5" class="stat-value">—</div>
+          <div class="stat-foot">Últimas 5 resoluções</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">MÉDIA AO12</div>
+          <div id="ao12" class="stat-value">—</div>
+          <div class="stat-foot">Últimas 12 resoluções</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">MÉDIA GERAL</div>
+          <div id="meanTime" class="stat-value">—</div>
+          <div class="stat-foot">Sessão atual</div>
+        </article>
+      </section>
+
+      <section class="history-card">
+        <div class="history-header">
+          <div>
+            <h2>Resoluções</h2>
+            <p>Seus tempos nesta sessão</p>
+          </div>
+          <div class="history-actions">
+            <button id="plusTwoBtn" class="secondary-btn" disabled>+2</button>
+            <button id="dnfBtn" class="secondary-btn" disabled>DNF</button>
+            <button id="deleteBtn" class="secondary-btn danger" disabled>Excluir</button>
+          </div>
+        </div>
+
+        <div id="history" class="history-list">
+          <div class="empty-state">
+            <div class="empty-icon">◷</div>
+            <strong>Nenhuma resolução ainda</strong>
+            <p>Seu primeiro tempo aparecerá aqui.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="app-footer">
+        <span>CubeTime <span class="accent">/</span> feito para treinar</span>
+        <span>Os tempos são armazenados neste dispositivo</span>
+      </footer>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
